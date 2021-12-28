@@ -17,7 +17,7 @@ public class User  implements Serializable {
     private String email;
     private String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Task> tasks;
 

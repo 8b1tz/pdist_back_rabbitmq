@@ -38,6 +38,7 @@ public class TaskController {
     @PostMapping("user/{iduser}/create/task/")
     public void create(@PathVariable long iduser, @RequestBody Task task) {
         User user = findUserById(iduser);
+
         TaskAuxiliar taskCr = new TaskAuxiliar("create",user,task);
         sendMessage(taskCr);
     }
@@ -51,12 +52,6 @@ public class TaskController {
 
     @GetMapping(path = {"user/{iduser}/tasks"})
     public List<Task> findAll(@PathVariable long iduser) {
-        if (taskService.findAll(iduser).size() < 1) {
-            for (int i = 0; i < 10; i++) {
-                Task t = new Task("teste" + i, "description" + i, "TODO", "03/12/2021");
-                taskService.create(iduser, t);
-            }
-        }
         return taskService.findAll(iduser);
     }
 

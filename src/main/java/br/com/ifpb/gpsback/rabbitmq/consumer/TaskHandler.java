@@ -24,13 +24,13 @@ public class TaskHandler {
     public void handleMessage(TaskAuxiliar taskaux ){
 
         if (Objects.equals(taskaux.getMethod(), "create")){
-            this.create(taskaux.getUser().getId(), taskaux.getTask());
+            this.create(taskaux.getUser(), taskaux.getTask());
         }
         else if (Objects.equals(taskaux.getMethod(), "update")){
             this.update(taskaux.getId(), taskaux.getTask(), taskaux.getUser());
         }
         else if (Objects.equals(taskaux.getMethod(), "delete")){
-            this.delete(taskaux.getUser().getId(), taskaux.getId());
+            this.delete(taskaux.getUser(), taskaux.getId());
         }
         else if (Objects.equals(taskaux.getMethod(), "register")){
             this.register(taskaux.getUser());
@@ -45,12 +45,12 @@ public class TaskHandler {
 
     }
 
-    public void create(long iduser, Task task) {
-         taskService.create(iduser, task);
+    public void create(User user, Task task) {
+         taskService.create(user, task);
     }
 
-    public void delete(long iduser, long idtask) {
-         taskService.delete(iduser, idtask);
+    public void delete(User user, long idtask) {
+         taskService.delete(user, idtask);
     }
 
     public void  update(long idtask, Task task, User user) {

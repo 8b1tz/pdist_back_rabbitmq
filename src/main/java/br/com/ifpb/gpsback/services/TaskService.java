@@ -19,25 +19,23 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void create(long iduser, Task task) {
+    public void create(User user, Task task) {
         try{
-            User user = userRepository.findById(iduser).get();
             user.addTask(task);
             taskRepository.save(task);
             userRepository.save(user);
         }
         catch (Exception e){
-            System.out.println("Something went wrong on create task.");
+            System.out.println("Something went wrong on delete task.");
         };
     }
 
-    public void delete(long iduser, long idtask) {
+    public void delete(User user, long idtask) {
         try{
-            User user = findUserById(iduser);
             Task taskExcluir = user.getTasks().stream().filter(task -> task.getId() == idtask).collect(Collectors.toList()).get(0);
             user.remTask(taskExcluir);
-            taskRepository.delete(taskExcluir);
             userRepository.save(user);
+            taskRepository.delete(taskExcluir);
         }
         catch (Exception e){
             System.out.println("Something went wrong on delete task.");
