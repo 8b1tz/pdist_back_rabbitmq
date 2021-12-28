@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigureRabbitMq {
 
-    public static final String EXCHANGE_NAME = "taskexchange";
-    public static final String QUEUE_NAME = "tasksqueue";
+    public static final String EXCHANGE_NAME = "pdistexchange";
+    public static final String QUEUE_NAME = "pdistqueue";
 
     @Bean
     Queue createQueue() {
@@ -31,6 +31,7 @@ public class ConfigureRabbitMq {
     Binding binding(Queue q, TopicExchange exchange){
         return BindingBuilder.bind(q).to(exchange).with("pdist.#");
     }
+
 
     @Bean
     SimpleMessageListenerContainer container( ConnectionFactory connectionFactory

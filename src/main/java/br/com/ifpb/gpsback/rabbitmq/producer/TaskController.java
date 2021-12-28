@@ -29,7 +29,7 @@ public class TaskController {
 
         rabbitTemplate.convertAndSend(
                 ConfigureRabbitMq.EXCHANGE_NAME,
-                "pdist.springmessages",
+                "pdist.taskmessage",
                 taskAux);
 
         return "We have sent a message! :" + "";
@@ -38,7 +38,6 @@ public class TaskController {
     @PostMapping("user/{iduser}/create/task/")
     public void create(@PathVariable long iduser, @RequestBody Task task) {
         User user = findUserById(iduser);
-
         TaskAuxiliar taskCr = new TaskAuxiliar("create",user,task);
         sendMessage(taskCr);
     }
@@ -67,38 +66,8 @@ public class TaskController {
         sendMessage(taskUp);
     }
 
-    // USER
-
-    @PostMapping("register")
-    public void register(@RequestBody User user) {
-        TaskAuxiliar userCr = new TaskAuxiliar("register", user);
-        sendMessage(userCr);
-    }
-
-    @DeleteMapping(path = {"delete/{iduser}"})
-    public void deleteUser(@PathVariable long iduser) {
-        TaskAuxiliar userUp = new TaskAuxiliar("deleteUser", iduser);
-        sendMessage(userUp);
-    }
-
-    @GetMapping(path= {"{iduser}"})
-    public User findUserById(@PathVariable long iduser) {
+    public User findUserById(long iduser) {
         return taskService.findUserById(iduser);
     }
 
-    @GetMapping(path= {"findall"})
-    public  List<User> findAllUsers() {
-        return taskService.findAllUsers();
-    }
-
-    @PutMapping(value = "update/{iduser}")
-    public void updateUser(@PathVariable long iduser, @RequestBody User user) {
-        TaskAuxiliar userUp = new TaskAuxiliar("updateUser", user, iduser);
-        sendMessage(userUp);
-    }
-
-    @PostMapping(value = "login")
-    public User login( @RequestBody User user) {
-        return taskService.login(user);
-    }
 }
