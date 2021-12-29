@@ -30,6 +30,7 @@ public class TaskService {
         };
     }
 
+
     public void delete(User user, long idtask) {
         try{
             Task taskExcluir = user.getTasks().stream().filter(task -> task.getId() == idtask).collect(Collectors.toList()).get(0);
@@ -126,4 +127,5 @@ public class TaskService {
         }
         return null;
     }
+
 }

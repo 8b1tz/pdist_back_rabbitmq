@@ -24,7 +24,7 @@ public class Task implements  Serializable {
     public Task() {
     }
 
-    public Task(int id, String title, String description, String status, String date) {
+    public Task(Long id, String title, String description, String status, String date) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -36,6 +36,22 @@ public class Task implements  Serializable {
         this.description = description;
         this.status = status;
         this.date = date;
+    }
+
+    public Task(Long id, String title, String description, String status, String date, User user) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.date = date;
+        this.user = user;
+    }
+
+    public Task( String title, String description, String status, String date, User user) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.date = date;
+        this.user = user;
     }
 
     public Long getId() {
